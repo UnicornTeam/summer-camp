@@ -1,0 +1,18 @@
+<block>
+  <name>Find pack by preamble</name>
+  <key>BLE_tools_find_pack_by_preamble</key>
+  <category>BLE_TOOLS</category>
+  <import>import BLE_tools</import>
+  <make>BLE_tools.find_pack_by_preamble()</make>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+  <doc>
+    
+  </doc>
+</block>

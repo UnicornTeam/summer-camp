@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>手机传感器参数</title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+            outline: none;
+            border: none;
+        }
+        #test, #test2{
+            width: 10rem;
+            height: 3rem;
+            line-height: 1rem;
+            font-size: .5rem;
+            text-align: left;
+            margin: 1rem 0 0 0;
+        }
+        input[type=button]{
+            font-size: .5rem;
+            padding: .3rem;
+            border-radius: .2rem;
+            background: red;
+            color: white;
+            margin: 0 0 0 .49rem;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" id="start" value="开始记录" onclick="enable=true"/>
+	<br>
+    <input type="button" id="pause" value="暂停记录" onclick="enable=false"/>
+    <div id="test"></div>
+	<div id="test2"></div>
+</body>
+</html>
+<script type="text/javascript">
+    /**
+     * 页面布局rem重置语句
+     */
+    $('html').css("font-size", $(window).width()/10);
+	var x, y, z, alpha, beta, gamma;
+    var speed = 30;//speed
+	var x = y = z = lastX = lastY = lastZ = 0;
+	var enable = false;
+	if (window.DeviceMotionEvent) { 
+		window.addEventListener('devicemotion',deviceMotionHandler, false);  
+    }
+	
+	window.addEventListener("deviceorientation", function (event) {
+		alpha = event.alpha;
+		beta = event.beta;
+		gamma = event.gamma;
+		var msg = "alpha: " + event.alpha + "<br>"
+				+ "beta: " + event.beta + "<br>"
+				+ "gamma: " + event.gamma + "<br>"
+		//$('#test2').html(msg);
+	});
+	function deviceMotionHandler(eventData) {  
+		//var acceleration =eventData.accelerationIncludingGravity;
+		var acceleration =eventData.acceleration;
+		x = acceleration.x;
+		y = acceleration.y;
+		z = acceleration.z;
+		if(Math.abs(x-lastX) > speed || Math.abs(y-lastY) > speed || Math.abs(z-lastZ) > speed) {
+			//alert('触发摇一摇');
+		}
+		lastX = x;
+		lastY = y;
+		lastZ = z;
+		var msg = "x: " + x + "<br>"
+				+ "y: " + x + "<br>"
+				+ "z: " + x + "<br>"
+		//$('#test').html(msg);
+	}
+	window.setInterval(function(){
+		if(!enable){
+			return;
+		}
+		var msg = "x: " + x + "<br>"
+				+ "y: " + y + "<br>"
+				+ "z: " + z + "<br>"
+				+ "alpha: " + alpha + "<br>"
+				+ "beta: " + beta + "<br>"
+				+ "gamma: " + gamma + "<br>"
+		$('#test').html(msg);
+		$.post('log.php', {
+			x:x,
+			y:y,
+			z:z,
+			alpha:alpha,
+			beta:beta,
+			gamma:gamma
+		},function(result){
+			//$('#test2').text(result)
+		})
+	},1000)
+</script>

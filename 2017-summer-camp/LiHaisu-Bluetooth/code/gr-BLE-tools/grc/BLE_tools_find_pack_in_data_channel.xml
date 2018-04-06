@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<block>
+  <name>find_pack_in_data_channel</name>
+  <key>BLE_tools_find_pack_in_data_channel</key>
+  <category>BLE_tools</category>
+  <import>import BLE_tools</import>
+  <make>BLE_tools.find_pack_in_data_channel($channel)</make>
+ 
+  <param>
+    <name>channel</name>
+    <key>channel</key>
+    <type>int</type>
+  </param>
+
+
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+ 
+</block>

@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">MotionEvent</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_motion_event">MotionEvent</string>
+ <string name="sensor_info">传感器的详细信息：</string>
+    <string name="x_info">x轴上(加速度、地磁、角速度)：</string>
+    <string name="y_info">y轴上(加速度、地磁、角速度)：</string>
+    <string name="z_info">z轴上(加速度、地磁、角速度)：</string>
+</resources>
